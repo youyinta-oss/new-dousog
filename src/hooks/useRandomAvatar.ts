@@ -12,14 +12,20 @@ export const useRandomAvatar = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const timestamp = Date.now();
-      const avatarUrl = `${API_URL}?t=${timestamp}`;
-      setCurrentAvatar(avatarUrl);
+      const response = await fetch(API_URL);
+      const result = await response.json();
       
-      setHistory(prev => {
-        const newHistory = [avatarUrl, ...prev.filter(url => url !== avatarUrl)];
-        return newHistory.slice(0, 12);
-      });
+      if (result.code === 200 && result.data) {
+        const avatarUrl = result.data;
+        setCurrentAvatar(avatarUrl);
+        
+        setHistory(prev => {
+          const newHistory = [avatarUrl, ...prev.filter(url => url !== avatarUrl)];
+          return newHistory.slice(0, 12);
+        });
+      } else {
+        throw new Error(result.msg || '获取头像失败');
+      }
     } catch (err) {
       setError('获取头像失败，请重试');
       console.error('Error fetching avatar:', err);
