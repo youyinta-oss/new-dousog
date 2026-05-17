@@ -40,20 +40,20 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ avatarUrl, isLoadi
   if (isLoading) return null;
 
   return (
-    <div className="flex gap-3 mt-6">
+    <div className="flex gap-3 mt-5">
       <button
         onClick={handleCopy}
-        className="flex items-center gap-2 px-5 py-3 bg-white/10 backdrop-blur-sm text-white rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
+        className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors"
       >
-        {copied ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5" />}
-        <span>{copied ? '已复制' : '复制链接'}</span>
+        {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
+        <span className="text-sm">{copied ? '已复制' : '复制链接'}</span>
       </button>
       <button
         onClick={handleDownload}
-        className="flex items-center gap-2 px-5 py-3 bg-white/10 backdrop-blur-sm text-white rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
+        className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors"
       >
-        <Download className="w-5 h-5" />
-        <span>下载头像</span>
+        <Download className="w-4 h-4" />
+        <span className="text-sm">下载</span>
       </button>
     </div>
   );
