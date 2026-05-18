@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吃了吗 - 骑手端</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-left">
+                <i class="ri-user-smile-line"></i>
+                <span class="rider-name">骑手小王</span>
+            </div>
+            <div class="header-right">
+                <span class="online-status online">在线</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">今日单量</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">¥0</div>
+                    <div class="stat-label">今日收入</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">4.8</div>
+                    <div class="stat-label">服务评分</div>
+                </div>
+            </section>
+
+            <section class="order-tabs">
+                <button class="tab-btn active" data-tab="pending">待接单</button>
+                <button class="tab-btn" data-tab="delivering">配送中</button>
+                <button class="tab-btn" data-tab="completed">已完成</button>
+            </section>
+
+            <section class="orders-section" id="pending-orders">
+                <div class="order-card">
+                    <div class="order-header">
+                        <span class="order-id">#12345</span>
+                        <span class="order-time">15:30</span>
+                    </div>
+                    <div class="order-info">
+                        <div class="location from">
+                            <i class="ri-store-2-line"></i>
+                            <div class="location-text">
+                                <div class="location-title">麦当劳(科技园店)</div>
+                                <div class="location-address">科技路123号</div>
+                            </div>
+                        </div>
+                        <div class="divider-line"></div>
+                        <div class="location to">
+                            <i class="ri-map-pin-2-line"></i>
+                            <div class="location-text">
+                                <div class="location-title">李先生</div>
+                                <div class="location-address">创业大厦A座1501</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span class="order-distance">2.3km</span>
+                        <span class="order-price">¥8.5</span>
+                        <button class="btn accept-btn">接单</button>
+                    </div>
+                </div>
+
+                <div class="order-card">
+                    <div class="order-header">
+                        <span class="order-id">#12346</span>
+                        <span class="order-time">15:32</span>
+                    </div>
+                    <div class="order-info">
+                        <div class="location from">
+                            <i class="ri-store-2-line"></i>
+                            <div class="location-text">
+                                <div class="location-title">张亮麻辣烫</div>
+                                <div class="location-address">科苑路456号</div>
+                            </div>
+                        </div>
+                        <div class="divider-line"></div>
+                        <div class="location to">
+                            <i class="ri-map-pin-2-line"></i>
+                            <div class="location-text">
+                                <div class="location-title">王女士</div>
+                                <div class="location-address">软件园二期B栋204</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span class="order-distance">1.8km</span>
+                        <span class="order-price">¥7.0</span>
+                        <button class="btn accept-btn">接单</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="orders-section hidden" id="delivering-orders">
+                <div class="order-card">
+                    <div class="order-header">
+                        <span class="order-id">#12340</span>
+                        <span class="order-status delivering">配送中</span>
+                    </div>
+                    <div class="order-info">
+                        <div class="location from">
+                            <i class="ri-store-2-line"></i>
+                            <div class="location-text">
+                                <div class="location-title">星巴克咖啡</div>
+                                <div class="location-address">科技路789号</div>
+                            </div>
+                        </div>
+                        <div class="divider-line"></div>
+                        <div class="location to">
+                            <i class="ri-map-pin-2-line"></i>
+                            <div class="location-text">
+                                <div class="location-title">赵先生</div>
+                                <div class="location-address">创新大厦C座8楼</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <button class="btn arrive-btn">已到店</button>
+                        <button class="btn complete-btn">已送达</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="orders-section hidden" id="completed-orders">
+                <div class="order-card">
+                    <div class="order-header">
+                        <span class="order-id">#12338</span>
+                        <span class="order-status completed">已完成</span>
+                    </div>
+                    <div class="order-info">
+                        <div class="location from">
+                            <i class="ri-store-2-line"></i>
+                            <div class="location-text">
+                                <div class="location-title">真功夫</div>
+                                <div class="location-address">科苑路111号</div>
+                            </div>
+                        </div>
+                        <div class="divider-line"></div>
+                        <div class="location to">
+                            <i class="ri-map-pin-2-line"></i>
+                            <div class="location-text">
+                                <div class="location-title">刘女士</div>
+                                <div class="location-address">创业园D栋302</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span class="order-time-completed">15:00完成</span>
+                        <span class="order-price">¥6.5</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-item active">
+                <i class="ri-list-check"></i>
+                <span>订单</span>
+            </button>
+            <button class="nav-item">
+                <i class="ri-wallet-3-line"></i>
+                <span>收入</span>
+            </button>
+            <button class="nav-item">
+                <i class="ri-user-3-line"></i>
+                <span>我的</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
