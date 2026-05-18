@@ -1,126 +1,77 @@
-# RandomAvatarApp - 构建和使用说明
+# TeamMind - 团队知识管理与协作平台
 
-## 项目简介
-
-这是一个使用随机头像 API 的 Android 应用，使用 Jetpack Compose 构建，Kotlin 开发。
-
-## 功能特性
-
-- 显示随机头像
-- 一键获取新头像
-- Material Design 3 界面
-- 优雅的加载和错误状态管理
+一个面向小型团队的知识沉淀工具，支持 Markdown 文档编辑、实时协作、AI 智能摘要和标签化分类，解决「团队知识散落在聊天记录和本地文件」的痛点。
 
 ## 技术栈
 
-- **语言: Kotlin
-- **UI**: Jetpack Compose
-- **图片加载: Coil
-- **网络请求: Retrofit + OkHttp
-- **最低 SDK 版本: Android 7.0 (API 24)
-- **目标 SDK 版本: Android 14 (API 34)
+- 前端: React 18 + TypeScript + Tailwind CSS
+- 全栈框架: Next.js 14 (App Router)
+- 编辑器: TipTap (基于 ProseMirror)
+- 实时通信: WebSocket + Yjs (CRDT 协同)
+- 数据库: PostgreSQL + Prisma ORM
+- 认证: NextAuth.js
+- AI 集成: OpenAI API
+- 部署: Docker
 
-## 在 Android Studio 中构建项目
+## 项目结构
 
-### 1. 导入项目
+```
+workspace/
+├── apps/
+│   └── web/                  # Next.js 主应用
+│       ├── src/
+│       │   ├── app/         # App Router 页面
+│       │   ├── components/  # React 组件
+│       │   │   └── editor/ # 文档编辑器
+│       │   └── lib/        # 工具库
+│       └── prisma/         # Prisma Schema
+├── docker-compose.yml      # Docker 服务编排
+└── package.json
+```
 
-1. 打开 Android Studio
-2. 选择 **File** → **Open**
-3. 导航到 `RandomAvatarApp` 文件夹
-4. 选择该文件夹并打开项目
+## 快速开始
 
-### 2. 等待同步 Gradle
+### 1. 启动数据库
 
-等待 Gradle 同步完成，可能需要下载依赖。
-
-如果网络问题解决方案:
-- 如果网络连接缓慢，配置国内镜像源（已在 `build.gradle.kts` 和 `settings.gradle.kts` 中配置好）
-- 或者配置 Android Studio 代理
-
-### 3. 构建 APK
-
-#### Debug APK 方法 1 - 使用菜单:
-
-1. 菜单栏选择 **Build** → **Build Bundle(s) / APK(s)** → **Build APK(s)**
-2. 构建完成后，点击通知中的 **locate** 找到 APK 文件
-
-#### Debug APK 方法 2 - 使用命令行:
-
-在项目根目录下运行：
 ```bash
-./gradlew assembleDebug
+docker-compose up -d
 ```
-APK 文件位置: `app/build/outputs/apk/debug/app-debug.apk
 
-### 4. 安装到设备
+### 2. 安装依赖
 
-1. 连接 Android 设备（开启 USB 调试)
-2. 在 Android Studio 点击运行按钮
-3. 或者使用命令行:
 ```bash
-./gradlew installDebug
+npm install
 ```
 
-## 项目结构说明
+### 3. 配置环境变量
 
-```
-RandomAvatarApp/
-├── app/
-│   ├── src/main/
-│   │   ├── java/com/example/randomavatarapp/
-│   │   │   ├── MainActivity.kt                    # 主界面和逻辑
-│   │   │   ├── network/
-│   │   │   │   ├── AvatarApiService.kt            # API 服务接口
-│   │   │   │   └── RetrofitClient.kt              # Retrofit 配置
-│   │   │   └── ui/theme/
-│   │   │       ├── Color.kt
-│   │   │       ├── Theme.kt
-│   │   │       └── Type.kt
-│   │   ├── res/
-│   │   │   ├── values/
-│   │   │   │   ├── strings.xml
-│   │   │   │   └── themes.xml
-│   │   │   └── xml/
-│   │   └── AndroidManifest.xml
-│   ├── build.gradle.kts
-│   └── proguard-rules.pro
-├── gradle/wrapper/
-├── build.gradle.kts
-├── gradle.properties
-├── settings.gradle.kts
-└── local.properties (自动生成)
+复制 `.env.example` 到 `.env` 并填写必要的配置：
+
+```bash
+cp .env.example .env
 ```
 
-## 主要文件说明
+### 4. 运行数据库迁移
 
-| 文件 | 说明 |
-| ---- | ---- |
-| MainActivity.kt | 主要的界面和应用逻辑，包含用户界面和头像加载功能 |
-| AvatarApiService.kt | 定义 API 接口定义 |
-| RetrofitClient.kt | Retrofit 和 OkHttp 配置 |
-| build.gradle.kts (app) | 应用级 Gradle 配置，包含所有依赖 |
-| build.gradle.kts (根) | 项目级 Gradle 配置 |
-
-## 自定义说明
-
-当前项目已经配置好了阿里云 Maven 镜像源，解决网络问题：
-- build.gradle.kts (根目录) 包含了国内镜像配置
-
-## 提示
-
-如果仍然遇到网络问题，可在项目根目录下创建 `gradle.properties` 添加:
-```properties
-systemProp.http.proxyHost=你的代理地址
-systemProp.http.proxyPort=端口号
-systemProp.https.proxyHost=你的代理地址
-systemProp.https.proxyPort=端口号
+```bash
+cd apps/web
+npx prisma generate
+npx prisma db push
 ```
 
-## 运行应用
+### 5. 启动开发服务器
 
-1. 确保你的设备或模拟器已连接
-2. 在 Android Studio 中点击运行
-3. 或者安装好后，点击 "获取新头像" 按钮，就能看到新的随机头像！
+```bash
+npm run dev
+```
 
-享受你的应用吧！
-# new-dousog
+应用将在 `http://localhost:3000` 启动。
+
+## 核心功能
+
+- 空间管理：创建团队空间，按项目/部门组织文档，支持成员权限控制
+- 文档编辑：富文本 + Markdown 双模式，支持代码高亮、图片拖拽上传、@提及
+- 实时协作：多人同时编辑文档，光标位置可见，变更实时同步
+- AI 助手：一键生成文档摘要、根据关键词推荐相关历史文档、智能纠错
+- 标签与搜索：文档打标签，全文检索 + 语义搜索，快速定位内容
+- 历史版本：自动保存编辑历史，支持版本对比和回滚
