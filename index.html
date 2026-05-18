@@ -2,180 +2,310 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>吃了吗 - 骑手端</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#FF6B35">
+    <title>吃了么 - 骑手端</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
-    <div class="app-container">
+    <div class="app">
         <header class="header">
-            <div class="header-left">
-                <i class="ri-user-smile-line"></i>
-                <span class="rider-name">骑手小王</span>
-            </div>
-            <div class="header-right">
-                <span class="online-status online">在线</span>
+            <div class="header-content">
+                <div class="avatar-wrapper">
+                    <div class="avatar">
+                        <i class="ri-user-line"></i>
+                    </div>
+                    <div class="status-dot online"></div>
+                </div>
+                <div class="header-info">
+                    <h1 class="rider-name">骑手小王</h1>
+                    <p class="rider-id">ID: 888888</p>
+                </div>
+                <div class="header-actions">
+                    <button class="action-btn" id="refresh-btn">
+                        <i class="ri-refresh-line"></i>
+                    </button>
+                    <button class="action-btn" id="message-btn">
+                        <i class="ri-message-line"></i>
+                        <span class="badge">3</span>
+                    </button>
+                </div>
             </div>
         </header>
 
+        <section class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value">0</div>
+                <div class="stat-label">今日单量</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-value">¥0</div>
+                <div class="stat-label">今日收入</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-value">4.9</div>
+                <div class="stat-label">服务评分</div>
+            </div>
+        </section>
+
+        <section class="quick-actions">
+            <button class="quick-btn primary">
+                <i class="ri-navigation-line"></i>
+                <span>导航</span>
+            </button>
+            <button class="quick-btn">
+                <i class="ri-phone-line"></i>
+                <span>客服</span>
+            </button>
+            <button class="quick-btn">
+                <i class="ri-help-circle-line"></i>
+                <span>帮助</span>
+            </button>
+        </section>
+
         <main class="main-content">
-            <section class="stats-section">
-                <div class="stat-card">
-                    <div class="stat-value">0</div>
-                    <div class="stat-label">今日单量</div>
+            <div class="tabs-wrapper">
+                <div class="tabs">
+                    <button class="tab active" data-tab="pending">
+                        <span class="tab-text">待接单</span>
+                        <span class="tab-badge">2</span>
+                    </button>
+                    <button class="tab" data-tab="delivering">
+                        <span class="tab-text">配送中</span>
+                        <span class="tab-badge active-badge">1</span>
+                    </button>
+                    <button class="tab" data-tab="completed">
+                        <span class="tab-text">已完成</span>
+                    </button>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value">¥0</div>
-                    <div class="stat-label">今日收入</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">4.8</div>
-                    <div class="stat-label">服务评分</div>
-                </div>
-            </section>
+            </div>
 
-            <section class="order-tabs">
-                <button class="tab-btn active" data-tab="pending">待接单</button>
-                <button class="tab-btn" data-tab="delivering">配送中</button>
-                <button class="tab-btn" data-tab="completed">已完成</button>
-            </section>
+            <div class="content-area">
+                <div class="order-list" id="pending-list">
+                    <div class="order-card" data-order-id="12345">
+                        <div class="card-header">
+                            <div class="order-id">#12345</div>
+                            <div class="order-time">15:30</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="route-info">
+                                <div class="point">
+                                    <div class="point-icon shop">
+                                        <i class="ri-store-2-fill"></i>
+                                    </div>
+                                    <div class="point-info">
+                                        <div class="point-name">麦当劳(科技园店)</div>
+                                        <div class="point-address">科技路123号创新大厦1层</div>
+                                    </div>
+                                </div>
+                                <div class="route-line">
+                                    <div class="line-dots"></div>
+                                </div>
+                                <div class="point">
+                                    <div class="point-icon user">
+                                        <i class="ri-user-fill"></i>
+                                    </div>
+                                    <div class="point-info">
+                                        <div class="point-name">李先生</div>
+                                        <div class="point-address">创业大厦A座1501室</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="order-meta">
+                                <span class="distance">2.3km</span>
+                                <span class="price">¥8.5</span>
+                            </div>
+                            <button class="btn-primary" id="accept-12345">接单</button>
+                        </div>
+                    </div>
 
-            <section class="orders-section" id="pending-orders">
-                <div class="order-card">
-                    <div class="order-header">
-                        <span class="order-id">#12345</span>
-                        <span class="order-time">15:30</span>
-                    </div>
-                    <div class="order-info">
-                        <div class="location from">
-                            <i class="ri-store-2-line"></i>
-                            <div class="location-text">
-                                <div class="location-title">麦当劳(科技园店)</div>
-                                <div class="location-address">科技路123号</div>
+                    <div class="order-card" data-order-id="12346">
+                        <div class="card-header">
+                            <div class="order-id">#12346</div>
+                            <div class="order-time">15:32</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="route-info">
+                                <div class="point">
+                                    <div class="point-icon shop">
+                                        <i class="ri-store-2-fill"></i>
+                                    </div>
+                                    <div class="point-info">
+                                        <div class="point-name">张亮麻辣烫</div>
+                                        <div class="point-address">科苑路456号软件园B区</div>
+                                    </div>
+                                </div>
+                                <div class="route-line">
+                                    <div class="line-dots"></div>
+                                </div>
+                                <div class="point">
+                                    <div class="point-icon user">
+                                        <i class="ri-user-fill"></i>
+                                    </div>
+                                    <div class="point-info">
+                                        <div class="point-name">王女士</div>
+                                        <div class="point-address">软件园二期B栋204室</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="divider-line"></div>
-                        <div class="location to">
-                            <i class="ri-map-pin-2-line"></i>
-                            <div class="location-text">
-                                <div class="location-title">李先生</div>
-                                <div class="location-address">创业大厦A座1501</div>
+                        <div class="card-footer">
+                            <div class="order-meta">
+                                <span class="distance">1.8km</span>
+                                <span class="price">¥7.0</span>
                             </div>
+                            <button class="btn-primary" id="accept-12346">接单</button>
                         </div>
-                    </div>
-                    <div class="order-footer">
-                        <span class="order-distance">2.3km</span>
-                        <span class="order-price">¥8.5</span>
-                        <button class="btn accept-btn">接单</button>
                     </div>
                 </div>
 
-                <div class="order-card">
-                    <div class="order-header">
-                        <span class="order-id">#12346</span>
-                        <span class="order-time">15:32</span>
-                    </div>
-                    <div class="order-info">
-                        <div class="location from">
-                            <i class="ri-store-2-line"></i>
-                            <div class="location-text">
-                                <div class="location-title">张亮麻辣烫</div>
-                                <div class="location-address">科苑路456号</div>
+                <div class="order-list hidden" id="delivering-list">
+                    <div class="order-card active-order" data-order-id="12340">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                            <div class="progress-steps">
+                                <span class="step completed">已接单</span>
+                                <span class="step active">配送中</span>
+                                <span class="step">已送达</span>
                             </div>
                         </div>
-                        <div class="divider-line"></div>
-                        <div class="location to">
-                            <i class="ri-map-pin-2-line"></i>
-                            <div class="location-text">
-                                <div class="location-title">王女士</div>
-                                <div class="location-address">软件园二期B栋204</div>
+                        <div class="card-header">
+                            <div class="order-id">#12340</div>
+                            <div class="order-status delivering">配送中</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="route-info">
+                                <div class="point">
+                                    <div class="point-icon shop visited">
+                                        <i class="ri-store-2-fill"></i>
+                                    </div>
+                                    <div class="point-info">
+                                        <div class="point-name">星巴克咖啡</div>
+                                        <div class="point-address">科技路789号</div>
+                                    </div>
+                                </div>
+                                <div class="route-line active">
+                                    <div class="line-progress" style="width: 60%"></div>
+                                </div>
+                                <div class="point">
+                                    <div class="point-icon user">
+                                        <i class="ri-user-fill"></i>
+                                    </div>
+                                    <div class="point-info">
+                                        <div class="point-name">赵先生</div>
+                                        <div class="point-address">创新大厦C座8楼</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="delivery-info">
+                                <div class="info-item">
+                                    <i class="ri-clock-line"></i>
+                                    <span>剩余 15分钟</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="ri-route-line"></i>
+                                    <span>距离 1.2km</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="order-footer">
-                        <span class="order-distance">1.8km</span>
-                        <span class="order-price">¥7.0</span>
-                        <button class="btn accept-btn">接单</button>
+                        <div class="card-footer">
+                            <div class="contact-btns">
+                                <button class="contact-btn" id="call-shop">
+                                    <i class="ri-phone-line"></i>
+                                    <span>联系商家</span>
+                                </button>
+                                <button class="contact-btn" id="call-user">
+                                    <i class="ri-phone-line"></i>
+                                    <span>联系用户</span>
+                                </button>
+                            </div>
+                            <div class="action-btns">
+                                <button class="btn-secondary" id="arrive-btn">已到店</button>
+                                <button class="btn-success" id="complete-btn">已送达</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            <section class="orders-section hidden" id="delivering-orders">
-                <div class="order-card">
-                    <div class="order-header">
-                        <span class="order-id">#12340</span>
-                        <span class="order-status delivering">配送中</span>
-                    </div>
-                    <div class="order-info">
-                        <div class="location from">
-                            <i class="ri-store-2-line"></i>
-                            <div class="location-text">
-                                <div class="location-title">星巴克咖啡</div>
-                                <div class="location-address">科技路789号</div>
+                <div class="order-list hidden" id="completed-list">
+                    <div class="order-card" data-order-id="12338">
+                        <div class="card-header">
+                            <div class="order-id">#12338</div>
+                            <div class="order-status completed">已完成</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="route-info">
+                                <div class="point">
+                                    <div class="point-icon shop">
+                                        <i class="ri-store-2-fill"></i>
+                                    </div>
+                                    <div class="point-info">
+                                        <div class="point-name">真功夫</div>
+                                        <div class="point-address">科苑路111号</div>
+                                    </div>
+                                </div>
+                                <div class="route-line">
+                                    <div class="line-dots completed"></div>
+                                </div>
+                                <div class="point">
+                                    <div class="point-icon user">
+                                        <i class="ri-user-fill"></i>
+                                    </div>
+                                    <div class="point-info">
+                                        <div class="point-name">刘女士</div>
+                                        <div class="point-address">创业园D栋302</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="divider-line"></div>
-                        <div class="location to">
-                            <i class="ri-map-pin-2-line"></i>
-                            <div class="location-text">
-                                <div class="location-title">赵先生</div>
-                                <div class="location-address">创新大厦C座8楼</div>
+                        <div class="card-footer">
+                            <div class="order-meta">
+                                <span class="completed-time">15:00 完成</span>
+                                <span class="price">¥6.5</span>
                             </div>
+                            <button class="btn-outline" id="replay-btn">查看详情</button>
                         </div>
-                    </div>
-                    <div class="order-footer">
-                        <button class="btn arrive-btn">已到店</button>
-                        <button class="btn complete-btn">已送达</button>
                     </div>
                 </div>
-            </section>
-
-            <section class="orders-section hidden" id="completed-orders">
-                <div class="order-card">
-                    <div class="order-header">
-                        <span class="order-id">#12338</span>
-                        <span class="order-status completed">已完成</span>
-                    </div>
-                    <div class="order-info">
-                        <div class="location from">
-                            <i class="ri-store-2-line"></i>
-                            <div class="location-text">
-                                <div class="location-title">真功夫</div>
-                                <div class="location-address">科苑路111号</div>
-                            </div>
-                        </div>
-                        <div class="divider-line"></div>
-                        <div class="location to">
-                            <i class="ri-map-pin-2-line"></i>
-                            <div class="location-text">
-                                <div class="location-title">刘女士</div>
-                                <div class="location-address">创业园D栋302</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-footer">
-                        <span class="order-time-completed">15:00完成</span>
-                        <span class="order-price">¥6.5</span>
-                    </div>
-                </div>
-            </section>
+            </div>
         </main>
 
         <nav class="bottom-nav">
             <button class="nav-item active">
-                <i class="ri-list-check"></i>
+                <i class="ri-list-check-line"></i>
                 <span>订单</span>
             </button>
             <button class="nav-item">
-                <i class="ri-wallet-3-line"></i>
+                <i class="ri-wallet-line"></i>
                 <span>收入</span>
             </button>
             <button class="nav-item">
-                <i class="ri-user-3-line"></i>
+                <i class="ri-map-line"></i>
+                <span>地图</span>
+            </button>
+            <button class="nav-item">
+                <i class="ri-user-line"></i>
                 <span>我的</span>
             </button>
         </nav>
+
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal" id="order-modal">
+                <div class="modal-header">
+                    <h3>订单详情</h3>
+                    <button class="modal-close" id="modal-close">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="app.js"></script>
