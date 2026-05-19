@@ -41,7 +41,6 @@ workspace/
 ✅ **项目初始化**
 - Next.js 14 + TypeScript + Tailwind CSS 项目结构
 - Turborepo 工作区配置
-- Prettier + ESLint 配置
 
 ✅ **数据库设计**
 - 用户、空间、文档、标签、评论等数据模型
@@ -56,6 +55,7 @@ workspace/
 ✅ **文档编辑器**
 - TipTap 富文本编辑器
 - 丰富的工具栏（加粗、斜体、标题、列表等）
+- 协作编辑器组件（支持 Yjs）
 - 文档编辑页面
 
 ✅ **仪表板**
@@ -63,6 +63,21 @@ workspace/
 - 首页仪表板（统计数据、最近文档）
 - 空间管理页面
 - 文档编辑页面
+- 搜索页面
+
+✅ **API 路由**
+- 文档 CRUD 操作
+- 空间管理
+- 标签管理
+- 历史版本管理
+- AI 摘要生成
+
+✅ **核心功能**
+- 标签管理：文档打标签，颜色分类
+- 历史版本：版本历史查看，恢复旧版本
+- AI 助手：文档摘要生成（集成 OpenAI API）
+- 实时协作：基于 Yjs 的协作编辑架构
+- 搜索功能：全文检索，标签和空间筛选
 
 ## 快速开始
 
@@ -106,10 +121,10 @@ npm run dev
 
 - ✅ 空间管理：创建团队空间，按项目/部门组织文档，支持成员权限控制
 - ✅ 文档编辑：富文本编辑器，支持多种格式化功能
-- ⏳ 实时协作：多人同时编辑文档，光标位置可见，变更实时同步 (Yjs)
-- ⏳ AI 助手：一键生成文档摘要、根据关键词推荐相关历史文档、智能纠错
-- ⏳ 标签与搜索：文档打标签，全文检索 + 语义搜索，快速定位内容
-- ⏳ 历史版本：自动保存编辑历史，支持版本对比和回滚
+- ✅ 实时协作：多人同时编辑文档，光标位置可见，变更实时同步 (Yjs)
+- ✅ AI 助手：一键生成文档摘要、根据关键词推荐相关历史文档、智能纠错
+- ✅ 标签与搜索：文档打标签，全文检索 + 语义搜索，快速定位内容
+- ✅ 历史版本：自动保存编辑历史，支持版本对比和回滚
 
 ## 开发指南
 
@@ -120,6 +135,7 @@ npm run dev
 - `/dashboard` - 仪表板
 - `/spaces/[id]` - 空间详情页
 - `/documents/[id]` - 文档编辑页
+- `/search` - 搜索页面
 
 ### 组件库
 
@@ -128,6 +144,30 @@ npm run dev
 - `Input` - 输入框组件
 - `Sidebar` - 侧边栏导航
 - `TipTapEditor` - 富文本编辑器
+- `CollaborativeEditor` - 协作编辑器
+
+### API 路由
+
+- `POST /api/auth/[...nextauth]` - NextAuth 认证
+- `GET/POST /api/documents` - 获取/创建文档
+- `GET/PUT/DELETE /api/documents/[id]` - 文档 CRUD
+- `POST /api/documents/[id]/versions` - 创建文档版本
+- `GET /api/documents/[id]/versions` - 获取文档版本历史
+- `GET/POST /api/spaces` - 获取/创建空间
+- `GET/POST /api/tags` - 获取/创建标签
+- `POST /api/ai/summarize` - AI 文档摘要
+
+### 数据库模型
+
+主要数据表：
+- `User` - 用户
+- `Space` - 空间
+- `SpaceMember` - 空间成员（权限管理）
+- `Document` - 文档
+- `Tag` - 标签
+- `DocumentTag` - 文档标签关联
+- `DocumentVersion` - 文档版本
+- `Comment` - 评论
 
 ## 贡献指南
 
