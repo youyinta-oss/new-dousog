@@ -1,57 +1,141 @@
-# React + TypeScript + Vite
+# GitHub Store - GitHub 商店
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一个精美的 GitHub 风格商店 Web 应用，展示和销售开发工具、插件和应用。
 
-Currently, two official plugins are available:
+## ✨ 功能特性
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🎨 GitHub 深色主题设计
+- 📦 产品浏览和搜索
+- 🗂️ 分类筛选（工具、插件、应用、主题）
+- 📄 详细产品页面
+- 🛒 购物车功能
+- 💳 结算流程
+- 📱 响应式设计
 
-## Expanding the ESLint configuration
+## 🚀 快速开始
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 安装依赖
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 启动开发服务器
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  extends: [
-    // other configs...
-    // Enable lint rules for React
-    reactX.configs['recommended-typescript'],
-    // Enable lint rules for React DOM
-    reactDom.configs.recommended,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm run dev
 ```
+
+访问 http://localhost:5173 查看应用。
+
+### 构建生产版本
+
+```bash
+npm run build
+```
+
+### 预览生产构建
+
+```bash
+npm run preview
+```
+
+## 🛠️ 技术栈
+
+- **React 18** - 前端框架
+- **TypeScript** - 类型安全
+- **Vite** - 构建工具
+- **Tailwind CSS** - 样式框架
+- **React Router** - 路由管理
+- **Zustand** - 状态管理
+- **Lucide React** - 图标库
+
+## 📁 项目结构
+
+```
+/workspace
+├── src/
+│   ├── components/        # 组件
+│   │   ├── Header.tsx
+│   │   ├── ProductCard.tsx
+│   │   └── CategoryFilter.tsx
+│   ├── pages/            # 页面
+│   │   ├── Home.tsx
+│   │   ├── ProductDetail.tsx
+│   │   ├── Category.tsx
+│   │   └── Cart.tsx
+│   ├── store/            # 状态管理
+│   │   └── useCartStore.ts
+│   ├── data/             # 数据
+│   │   └── mockData.ts
+│   ├── types/            # 类型定义
+│   │   └── index.ts
+│   ├── App.tsx
+│   └── main.tsx
+├── public/
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+└── tailwind.config.js
+```
+
+## 📝 页面说明
+
+### 首页 (/)
+- 展示所有产品
+- 分类导航
+- 产品卡片网格
+
+### 产品详情页 (/product/:id)
+- 产品大图展示
+- 产品详细信息
+- 产品截图
+- 加入购物车按钮
+
+### 分类页 (/category/:category)
+- 按分类筛选产品
+- 显示产品数量
+
+### 购物车 (/cart)
+- 购物车商品列表
+- 数量调整
+- 删除商品
+- 总价计算
+
+## 🎯 核心功能
+
+### 购物车状态管理
+使用 Zustand 进行全局状态管理：
+- 添加商品
+- 删除商品
+- 调整数量
+- 计算总价
+
+### 分类系统
+支持以下分类：
+- 工具 (Tools)
+- 插件 (Plugins)
+- 应用 (Apps)
+- 主题 (Themes)
+
+## 📄 文档
+
+- [产品需求文档 (PRD)](.trae/documents/prd.md)
+- [技术架构文档](.trae/documents/arch.md)
+
+## 📦 示例产品
+
+- GitHub Actions Pro
+- Code Review Assistant
+- Git History Visualizer
+- Issue Tracker Pro
+- Dark Theme Pack
+- Pull Request Enhancer
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+## 📄 许可证
+
+MIT License
