@@ -1,7 +1,7 @@
 import { chromium, Browser, BrowserContext } from 'playwright';
-import { getRandomUA, getViewportForUA, ANTI_DETECT_SCRIPT } from '../../utils/anti-detect';
-import { config } from '../../config';
-import { logger } from '../../utils/logger';
+import { getRandomUA, getViewportForUA, ANTI_DETECT_SCRIPT } from '../utils/anti-detect';
+import { config } from '../config';
+import { logger } from '../utils/logger';
 
 class BrowserManager {
   private browser: Browser | null = null;
@@ -10,7 +10,7 @@ class BrowserManager {
   async launch(): Promise<void> {
     if (this.browser) return;
 
-    const launchOptions = {
+    const launchOptions: Parameters<typeof chromium.launch>[0] = {
       headless: true,
       args: [
         '--disable-blink-features=AutomationControlled',
@@ -21,7 +21,7 @@ class BrowserManager {
     };
 
     if (config.proxyUrl) {
-      launchOptions['proxy'] = { server: config.proxyUrl };
+      launchOptions.proxy = { server: config.proxyUrl };
     }
 
     this.browser = await chromium.launch(launchOptions);

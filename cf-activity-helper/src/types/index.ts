@@ -51,6 +51,8 @@ export interface ActivityInfo {
   rewards?: string[];
   lastChecked?: string;
   pageStructure?: PageStructure;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 /** 任务执行结果 */
